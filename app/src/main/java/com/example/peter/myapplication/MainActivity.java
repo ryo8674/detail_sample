@@ -1,10 +1,12 @@
 package com.example.peter.myapplication;
 
+import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.LinearSmoothScroller;
 import android.support.v7.widget.RecyclerView;
+import android.util.DisplayMetrics;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -53,14 +55,58 @@ public class MainActivity extends AppCompatActivity implements ThumbnailRecycler
         list.add(R.drawable.photo06);
         list.add(R.drawable.photo07);
         list.add(R.drawable.photo08);
+        list.add(R.drawable.photo01);
+        list.add(R.drawable.photo02);
+        list.add(R.drawable.photo03);
+        list.add(R.drawable.photo04);
+        list.add(R.drawable.photo05);
+        list.add(R.drawable.photo06);
+        list.add(R.drawable.photo07);
+        list.add(R.drawable.photo08);
+        list.add(R.drawable.photo01);
+        list.add(R.drawable.photo02);
+        list.add(R.drawable.photo03);
+        list.add(R.drawable.photo04);
+        list.add(R.drawable.photo05);
+        list.add(R.drawable.photo06);
+        list.add(R.drawable.photo07);
+        list.add(R.drawable.photo08);
+        list.add(R.drawable.photo01);
+        list.add(R.drawable.photo02);
+        list.add(R.drawable.photo03);
+        list.add(R.drawable.photo04);
+        list.add(R.drawable.photo05);
+        list.add(R.drawable.photo06);
+        list.add(R.drawable.photo07);
+        list.add(R.drawable.photo08);
+        list.add(R.drawable.photo01);
+        list.add(R.drawable.photo02);
+        list.add(R.drawable.photo03);
+        list.add(R.drawable.photo04);
+        list.add(R.drawable.photo05);
+        list.add(R.drawable.photo06);
+        list.add(R.drawable.photo07);
+        list.add(R.drawable.photo08);
         return list;
     }
 
     @Override
     public void onTap(int position) {
         recyclerView.scrollToPosition(position);
-        LinearLayoutManager manager = (LinearLayoutManager) recyclerView.getLayoutManager();
-        manager.scrollToPositionWithOffset(position, 0);
+        final LinearLayoutManager manager = (LinearLayoutManager) recyclerView.getLayoutManager();
+        final RecyclerView.SmoothScroller smoothScroller = new LinearSmoothScroller(this){
+            @Override
+            protected int getHorizontalSnapPreference() {
+                return LinearSmoothScroller.SNAP_TO_START;
+            }
+
+            @Override
+            protected float calculateSpeedPerPixel(DisplayMetrics displayMetrics) {
+                return 100f/displayMetrics.densityDpi;
+            }
+        };
+        smoothScroller.setTargetPosition(position);
+        manager.startSmoothScroll(smoothScroller);
         recyclerView.setLayoutManager(manager);
         pager.setCurrentItem(position, true);
     }
